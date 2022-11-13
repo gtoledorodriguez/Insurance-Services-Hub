@@ -29,7 +29,7 @@ public class Utilities extends HttpServlet {
 
 
 
-    /*  getFullURL Function - Reconstructs the URL user request  */
+    /*  getFullURL Function - Reconstructs the URL user request   */
 
     public String getFullURL() {
         String scheme = req.getScheme();

@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 @Table(name = "auto_service")
 public class AutoService {
-    @Id
+    @Id //主鍵
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int auto_service_id;
 

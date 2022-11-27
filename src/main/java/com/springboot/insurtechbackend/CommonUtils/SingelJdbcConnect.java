@@ -8,7 +8,7 @@ public class SingelJdbcConnect {
     public static JdbcTemplate showSingleTyepValue(){
         DriverManagerDataSource driverManagerDataSource=new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/insurancedbz?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false");
+            driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/insurancedbz?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false");
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("123456");
 

@@ -17,7 +17,7 @@ public class UserProcessDao {
         System.out.println("1");
         List<Map<String, Object>>  result = template.queryForList("select *  from user " +
                 "left join vehicleinfo on user.UserID =vehicleinfo.userID " +
-                "left join  arpersonalinfo  on user.UserID =arpersonalinfo.userID");
+                "left join  arpersonalinfo  on user.UserID =arpersonalinfo.userID left join address on  user.UserID= address.UserID");
         System.out.println( "  "+result.get(1).get("FirstName"));
         System.out.println("XXX "+result.toString());
         String jsonxx = JSONObject.toJSONString(result);

@@ -52,21 +52,21 @@ public class TrendingController {
         return resultBox;
     }
 
-    // @PostMapping("/getAllServicesSoldByAgent")
-    // @ResponseBody
-    // public ResultInfo getAllServicesSoldByAgent_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
-    //     List<Map<String, Object>> result = null;
-    //     ResultInfo resultBox = new ResultInfo();
-    //     resultBox.setFlag("1");
-    //     resultBox.setErrorMsg("successfully");
-    //     int AgentID = (int) map.get("AgentID");
-    //     System.out.println("AgentID"+AgentID);
-    //     result= TrendingDao.getAllServicesSoldByAgent(AgentID);
-    //     resultBox.setData(result);
-    //     return resultBox;
+    @PostMapping("/getAllServicesSoldByAgent")
+    @ResponseBody
+    public ResultInfo getAllServicesSoldByAgent_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+        List<Map<String, Object>> result = null;
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+        int AgentID = (int) map.get("AgentID");
+        System.out.println("AgentID"+AgentID);
+        result= TrendingDao.getAllServicesSoldByAgent(AgentID);
+        resultBox.setData(result);
+        return resultBox;
 
 
-    // }
+    }
 
 //     //Get all service data of this user.
 //     @PostMapping("/listByID")

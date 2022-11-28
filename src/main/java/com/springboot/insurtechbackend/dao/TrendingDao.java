@@ -75,14 +75,14 @@ public class TrendingDao {
 
     }
 
-    // public static List<Map<String, Object>> getAllServicesSoldByAgent(int agentID) {
-    //     System.out.println("into getAllServicesSoldByAgent");
-    //     List<Map<String, Object>> result;
-    //     JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
-    //     String SqlStr = "select AgentID ,AutoServiceID, count(*) as c FROM insurancedbz.serviceorder Where AgentID=? GROUP BY AutoServiceID order by c desc limit 5;";
-    //     result = template.queryForList(SqlStr, agentID);
-    //     return result;
-    // }
+    public static List<Map<String, Object>> getAllServicesSoldByAgent(int agentID) {
+        System.out.println("into getAllServicesSoldByAgent");
+        List<Map<String, Object>> result;
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        String SqlStr = "select AgentID ,AutoServiceID, count(*) as c FROM insurancedbz.serviceorder Where AgentID=? GROUP BY AutoServiceID order by c desc limit 5;";
+        result = template.queryForList(SqlStr, agentID);
+        return result;
+    }
 
     // public static int delectServiceDateById( int serviceId) {
     // System.out.println("into delectServiceDateById");

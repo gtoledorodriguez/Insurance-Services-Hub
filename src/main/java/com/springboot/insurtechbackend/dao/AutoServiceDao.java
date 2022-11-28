@@ -20,7 +20,7 @@ public class AutoServiceDao {
 //        AutoServiceDao.getAllServiceDate();
 //        AutoServiceDao.getAllServiceListOrByUserID("1","1");
     }
-    // 2 is all ,1 is by id /
+    // 2 is all ,1 is by id /select * from serviceorder
     public static List<Map<String, Object>> getAllServiceListOrByUserID(String userId,String op ) {
         System.out.println("into getAllServiceListOrByUserID");
         List<Map<String, Object>>  result;

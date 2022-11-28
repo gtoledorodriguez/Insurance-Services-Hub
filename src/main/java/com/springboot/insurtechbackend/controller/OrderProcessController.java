@@ -63,7 +63,8 @@ public class OrderProcessController {
         int serviceOrderID = (int) map.get("ServiceOrderID");
         String Description = (String)map.get("Description");
         ResultInfo resultBox = new ResultInfo();
-
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
         double Discount = (double)map.get("Discount");
         double Total = (double)map.get("Total");
         int price = (int)map.get("price");
@@ -77,6 +78,8 @@ public class OrderProcessController {
         JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
         int result = template.update(SqlStr,Description,Discount,Total,AgentID,Status,AutoServiceID,totalPrice,serviceOrderID);
         System.out.println("result"+result);
+        resultBox.setData(result);
+
         return resultBox;
     }
 
@@ -98,6 +101,7 @@ public class OrderProcessController {
     public ResultInfo addOrder(@RequestBody Map<String, Object> map, HttpServletRequest request) {
         String Description = (String)map.get("Description");
         ResultInfo resultBox = new ResultInfo();
+
         String UserID = (String)map.get("UserID");
         resultBox.setFlag("1");
         resultBox.setErrorMsg("successfully");

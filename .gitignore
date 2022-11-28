@@ -30,3 +30,4 @@ build/
 
 ### VS Code ###
 .vscode/
+src/main/java/com/springboot/insurtechbackend/CommonUtils/SingelJdbcConnect.java

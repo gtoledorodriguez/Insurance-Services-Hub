@@ -39,18 +39,18 @@ public class TrendingController {
     //     resultBox.setData(result);
     //     return resultBox;
     // }
-    // @PostMapping("/getAllServicesByMostBought")
-    // @ResponseBody
-    // public ResultInfo getAllServicesByMostBought_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
-    //     List<Map<String, Object>> result = null;
-    //     ResultInfo resultBox = new ResultInfo();
-    //     resultBox.setFlag("1");
-    //     resultBox.setErrorMsg("successfully");
+    @PostMapping("/getAllServicesByMostBought")
+    @ResponseBody
+    public ResultInfo getAllServicesByMostBought_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+        List<Map<String, Object>> result = null;
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
 
-    //     result= TrendingDao.getAllServicesByMostBought();
-    //     resultBox.setData(result);
-    //     return resultBox;
-    // }
+        result= TrendingDao.getAllServicesByMostBought();
+        resultBox.setData(result);
+        return resultBox;
+    }
 
     // @PostMapping("/getAllServicesSoldByAgent")
     // @ResponseBody

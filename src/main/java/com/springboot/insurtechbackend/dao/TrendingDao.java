@@ -61,19 +61,19 @@ public class TrendingDao {
     // }
 
     // auto_service table
-    // public static List<Map<String, Object>> getAllServicesByMostBought() {
-    //     System.out.println("into getAllServicesByMostBought");
-    //     List<Map<String, Object>> result;
-    //     JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
-    //     String SqlStr = "";
-    //     SqlStr = SqlStr
-    //             + "select AutoServiceID, count(*) as c FROM insurancedbz.serviceorder GROUP BY AutoServiceID order by c desc limit 5;";
-    //     result = template.queryForList(SqlStr);
-    //     String jsonxx = JSONObject.toJSONString(result);
-    //     System.out.println("jsonxx" + jsonxx);
-    //     return result;
+    public static List<Map<String, Object>> getAllServicesByMostBought() {
+        System.out.println("into getAllServicesByMostBought");
+        List<Map<String, Object>> result;
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        String SqlStr = "";
+        SqlStr = SqlStr
+                + "select AutoServiceID, count(*) as c FROM insurancedbz.serviceorder GROUP BY AutoServiceID order by c desc limit 5;";
+        result = template.queryForList(SqlStr);
+        String jsonxx = JSONObject.toJSONString(result);
+        System.out.println("jsonxx" + jsonxx);
+        return result;
 
-    // }
+    }
 
     // public static List<Map<String, Object>> getAllServicesSoldByAgent(int agentID) {
     //     System.out.println("into getAllServicesSoldByAgent");

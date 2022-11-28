@@ -10,7 +10,7 @@ public class SingelJdbcConnect {
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
             driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/insurancedbz?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false");
         driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("123456");
+        driverManagerDataSource.setPassword("root");
 
         //创建jdbctemplate对象，设置数据源
         JdbcTemplate jdbcTemplate=new JdbcTemplate(driverManagerDataSource);

@@ -52,21 +52,25 @@ public class TrendingController {
         return resultBox;
     }
 
-    @PostMapping("/getAllServicesSoldByAgent")
+    @GetMapping("/getAllServicesSoldByAgent")
+//    @PostMapping("/getAllServicesSoldByAgent")
     @ResponseBody
     public ResultInfo getAllServicesSoldByAgent_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
         List<Map<String, Object>> result = null;
         ResultInfo resultBox = new ResultInfo();
         resultBox.setFlag("1");
         resultBox.setErrorMsg("successfully");
-        int AgentID = (int) map.get("AgentID");
+        System.out.println(map.keySet());
+        System.out.println(map.get("userID"));
+        int AgentID = Integer.valueOf((String) map.get("userID"));
+        //int AgentID = (int) map.get("userID");
         if (!(AgentID > -1)){
-            System.out.println("AgentID");
+            System.out.println("userID");
             resultBox.setFlag("0");
-            resultBox.setErrorMsg("no AgentID, process error");
+            resultBox.setErrorMsg("no userID, process error");
             return resultBox;
         }
-        System.out.println("AgentID"+AgentID);
+        System.out.println("userID"+AgentID);
         result= TrendingDao.getAllServicesSoldByAgent(AgentID);
         resultBox.setData(result);
         return resultBox;

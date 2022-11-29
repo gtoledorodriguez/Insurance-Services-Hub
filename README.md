@@ -7,3 +7,9 @@
 ## Run project steps:
 - modify the mysql username and password in the SingelJdbcConnectModify.java file
 - Add and run insuranceDB.sql file, add database structure and data to mysql 
+
+### MongoDB
+- Create a database and a collection
+  - Database Name: `ServiceReviews`
+  - Collection Name: `customerReviews`
+  - host: `localhost`, port: `27017`

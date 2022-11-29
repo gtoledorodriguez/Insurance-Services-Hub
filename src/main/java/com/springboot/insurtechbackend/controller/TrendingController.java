@@ -8,6 +8,7 @@ import com.springboot.insurtechbackend.repository.ServiceRepository;
 import com.springboot.insurtechbackend.respository.ServiceRepositoryCURD;
 import org.omg.CORBA.portable.ValueOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -40,10 +41,10 @@ public class TrendingController {
     //     return resultBox;
     // }
 
-    @GetMapping("/getAllServicesByMostBought")
-//    @PostMapping("/getAllServicesByMostBought")
+    @GetMapping("/getTopServicesByMostBought")
+//    @PostMapping("/getTopServicesByMostBought")
     @ResponseBody
-    public ResultInfo getAllServicesByMostBought_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+    public ResultInfo getTopServicesByMostBought_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
         List<Map<String, Object>> result = null;
         ResultInfo resultBox = new ResultInfo();
         resultBox.setFlag("1");
@@ -54,26 +55,52 @@ public class TrendingController {
         return resultBox;
     }
 
-    @GetMapping("/getAllServicesSoldByAgent")
-//    @PostMapping("/getAllServicesSoldByAgent")
+    @GetMapping("/getBestServicesSoldByAgent")
+//    @PostMapping("/getBestServicesSoldByAgent")
     @ResponseBody
-    public ResultInfo getAllServicesSoldByAgent_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+    public ResultInfo getBestServicesSoldByAgent_service(@RequestParam(name="agentID",defaultValue="-1") int AgentID, @RequestBody Map<String, Object> map, HttpServletRequest request) {
         List<Map<String, Object>> result = null;
         ResultInfo resultBox = new ResultInfo();
         resultBox.setFlag("1");
         resultBox.setErrorMsg("successfully");
-        System.out.println(map.keySet());
-        System.out.println(map.get("userID"));
-        int AgentID = Integer.valueOf((String) map.get("userID"));
+//        System.out.println(map.keySet());
+//        System.out.println(map.get("userID"));
+//        int AgentID = Integer.valueOf((String) map.get("userID"));
+        System.out.println(AgentID);
         //int AgentID = (int) map.get("userID");
         if (!(AgentID > -1)){
-            System.out.println("userID");
+            System.out.println("agentID");
             resultBox.setFlag("0");
-            resultBox.setErrorMsg("no userID, process error");
+            resultBox.setErrorMsg("no agentID, process error");
             return resultBox;
         }
-        System.out.println("userID"+AgentID);
+        System.out.println("agentID "+AgentID);
         result= TrendingDao.getAllServicesSoldByAgent(AgentID);
+        resultBox.setData(result);
+        return resultBox;
+    }
+
+    @GetMapping("/getBestAgentsByService")
+//    @PostMapping("/getBestAgentsByService")
+    @ResponseBody
+    public ResultInfo getBestAgentsByService_service(@RequestParam(name="autoServiceID",defaultValue="-1")  int AutoServiceID, @RequestBody Map<String, Object> map, HttpServletRequest request) {
+        List<Map<String, Object>> result = null;
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+//        System.out.println(map.keySet());
+//        System.out.println(map.get("userID"));
+//        int AutoServiceID = Integer.valueOf((String) map.get("userID"));
+        System.out.println(AutoServiceID);
+        //int AutoServiceID = (int) map.get("userID");
+        if (!(AutoServiceID > -1)){
+            System.out.println("autoServiceID");
+            resultBox.setFlag("0");
+            resultBox.setErrorMsg("no autoServiceID, process error");
+            return resultBox;
+        }
+        System.out.println("autoServiceID "+AutoServiceID);
+        result= TrendingDao.getBestAgentsByService(AutoServiceID);
         resultBox.setData(result);
         return resultBox;
     }

@@ -31,3 +31,18 @@ build/
 ### VS Code ###
 .vscode/
 src/main/java/com/springboot/insurtechbackend/CommonUtils/SingelJdbcConnect.java
+src/main/resources/application.properties
+src/main/resources/application.properties
+src/main/resources/application.properties
+.idea/compiler.xml
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/jarRepositories.xml
+.idea/workspace.xml
+.idea/encodings.xml
+.idea/compiler.xml
+src/main/resources/application.properties
+src/main/resources/application.properties
+src/main/resources/application.properties
+*.properties
+*.xml

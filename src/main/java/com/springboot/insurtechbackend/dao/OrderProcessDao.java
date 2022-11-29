@@ -32,4 +32,27 @@ public class OrderProcessDao {
         return result ;
 
     }
-}
+    public static List<Map<String, Object>> queryAllOderInfo( ) {
+        System.out.println("into getOderListByName");
+        List<Map<String, Object>>  result;
+        //run sql must add below code
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        System.out.println("1");
+        result = template.queryForList("select * from serviceorder left join user on serviceorder.UserID=user.UserID  ");
+        System.out.println("XXX "+result.toString());
+        String jsonxx = JSONObject.toJSONString(result);
+        System.out.println("jsonxx"+jsonxx);
+        return result ;
+    }
+    public static int delectOrderById(int orderID ) {
+        System.out.println("into delectOrderById");
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        String SqlStr="DELETE FROM serviceorder WHERE ServiceOrderID =? ";
+        int result = template.update(SqlStr,orderID);
+        return result;
+
+    }
+
+
+
+    }

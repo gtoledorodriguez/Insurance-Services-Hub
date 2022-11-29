@@ -157,6 +157,7 @@ public class AutoServiceInfoConstoller {
         autoService.setComprehensive((int)map.get("comprehensive"));
         autoService.setCreate_time(new Date());
         autoService.setLiability_property((int) map.get("liability_property"));
+        autoService.setLiability_bodily((int) map.get("liability_bodily"));
         autoService.setMedical((int) map.get("medical"));
         autoService.setUm_bodily((int) map.get("um_bodily"));
         autoService.setUm_property((int) map.get("um_property"));
@@ -198,6 +199,24 @@ public class AutoServiceInfoConstoller {
         AutoService save = serviceRepositoryCURD.save(autoService);
         System.out.println("return"+save);
         resultBox.setData(save);
+        return resultBox;
+
+    }
+    @PostMapping("/getServiceByServiceID")
+    @ResponseBody
+    public ResultInfo getServiceByServiceID(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+        System.out.println("into updateService");
+        List<Map<String, Object>> result = null;
+
+        int serviceId = (int)map.get("serviceId");
+
+
+
+        result= AutoServiceDao.getServiceByServiceID(serviceId);
+        resultBox.setData(result);
         return resultBox;
 
     }

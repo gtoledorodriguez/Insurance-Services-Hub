@@ -20,7 +20,7 @@ public class AutoServiceDao {
 //        AutoServiceDao.getAllServiceDate();
 //        AutoServiceDao.getAllServiceListOrByUserID("1","1");
     }
-    // 2 is all ,1 is by id /
+    // 2 is all ,1 is by id /select * from serviceorder
     public static List<Map<String, Object>> getAllServiceListOrByUserID(String userId,String op ) {
         System.out.println("into getAllServiceListOrByUserID");
         List<Map<String, Object>>  result;
@@ -92,6 +92,19 @@ public class AutoServiceDao {
 
         //创建sql语句
         return  result;
+    }
+    public static List<Map<String, Object>>  getServiceByServiceID( int serviceId ) {
+        System.out.println("into getServiceByServiceID");
+        List<Map<String, Object>>  result;
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        String SqlStr ="";
+        SqlStr=SqlStr+"select * from auto_service  where auto_service_id =?";
+        result = template.queryForList(SqlStr,serviceId);
+        String jsonxx = JSONObject.toJSONString(result);
+        System.out.println("jsonxx"+jsonxx);
+        return result ;
+
+
     }
 //    public static int updateServiceDate( ) {
 //

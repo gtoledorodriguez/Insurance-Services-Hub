@@ -103,7 +103,24 @@ public class UserProcessDao {
         }
         return hm;
     }
+    public static List<Map<String, Object>>  getUserByType(String UserType)   {
+        List<Map<String, Object>>  result;
+        JdbcTemplate template =  SingelJdbcConnect.showSingleTyepValue();
+        String sql = "select * from  User where UserType=? ";
+        result = template.queryForList(sql,UserType);
+        System.out.println("rs"+result.toString());
+        return result;
 
+    }
+    public static List<Map<String, Object>>  getUserByType(int userID)   {
+
+        List<Map<String, Object>>  result;
+        JdbcTemplate template =  SingelJdbcConnect.showSingleTyepValue();
+        String sql = "select * from  User where UserID=? ";
+        result = template.queryForList(sql,userID);
+        System.out.println("rs"+result.toString());
+        return result;
+    }
 
 
 }

@@ -101,6 +101,10 @@ public class UserController {
         return responseJson;
 
     }
+
+
+
+
     @PostMapping("/registration")
     @ResponseBody
     //regist user info
@@ -174,4 +178,39 @@ public class UserController {
         System.out.println("jsonxx"+reJson);
         return resultBox;
     }
+    @PostMapping("/getUserByType")
+    @ResponseBody
+    //regist user info
+    public ResultInfo getUserByType(@RequestBody Map<String, Object> map,HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("into getUserByType");
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+        List<Map<String, Object>> result = null;
+        String UserType = (String) map.get("UserType");
+        result = UserProcessDao.getUserByType(UserType);
+        System.out.println("result"+result.toString());
+        resultBox.setData(result);
+        return resultBox;
+    }
+    @PostMapping("/getUserById")
+    @ResponseBody
+    //regist user info
+    public ResultInfo getUserByID(@RequestBody Map<String, Object> map,HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("into getUserById");
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+        List<Map<String, Object>> result = null;
+        int userID = (int) map.get("userID");
+        result = UserProcessDao.getUserByType(userID);
+        System.out.println("result"+result.toString());
+        resultBox.setData(result);
+        return resultBox;
+
+
+    }
+
+
+
 }

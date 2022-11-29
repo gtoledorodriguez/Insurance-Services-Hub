@@ -60,6 +60,12 @@ public class TrendingController {
         resultBox.setFlag("1");
         resultBox.setErrorMsg("successfully");
         int AgentID = (int) map.get("AgentID");
+        if (!(AgentID > -1)){
+            System.out.println("AgentID");
+            resultBox.setFlag("0");
+            resultBox.setErrorMsg("no AgentID, process error");
+            return resultBox;
+        }
         System.out.println("AgentID"+AgentID);
         result= TrendingDao.getAllServicesSoldByAgent(AgentID);
         resultBox.setData(result);

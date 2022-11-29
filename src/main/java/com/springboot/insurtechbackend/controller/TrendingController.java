@@ -39,7 +39,9 @@ public class TrendingController {
     //     resultBox.setData(result);
     //     return resultBox;
     // }
-    @PostMapping("/getAllServicesByMostBought")
+
+    @GetMapping("/getAllServicesByMostBought")
+//    @PostMapping("/getAllServicesByMostBought")
     @ResponseBody
     public ResultInfo getAllServicesByMostBought_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
         List<Map<String, Object>> result = null;

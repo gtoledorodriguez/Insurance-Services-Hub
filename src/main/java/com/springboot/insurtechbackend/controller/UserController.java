@@ -125,11 +125,12 @@ public class UserController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//改为需要的东西
         String UserName = FirstName+" "+ LastName;
 
-        String address = (String) map.get("address");
-        String city = (String) map.get("city");
-        String state = (String) map.get("state");
-        String zipCode = (String) map.get("zipCode");
-        String apt = (String) map.get("apt");
+        String address = (String) map.get("Address");
+        System.out.println("Address"+address);
+        String city = (String) map.get("City");
+        String state = (String) map.get("State");
+        String zipCode = (String) map.get("ZipCode");
+        String apt = (String) map.get("Apt");
         String fullAddress =  address+", "+city+", "+state+", "+zipCode;
 
 
@@ -171,6 +172,6 @@ public class UserController {
         System.out.println("jsonxx"+reJson);
         resultBox.setData(reJson);
         System.out.println("jsonxx"+reJson);
-         return resultBox;
+        return resultBox;
     }
 }

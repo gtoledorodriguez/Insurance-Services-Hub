@@ -61,6 +61,14 @@
 		</dependency>
 
 
+		<!--&#45;&#45;java tools-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+
+
 
         <!--druid is jdbc data source ,it is very convenient for operate database-->
         <dependency>

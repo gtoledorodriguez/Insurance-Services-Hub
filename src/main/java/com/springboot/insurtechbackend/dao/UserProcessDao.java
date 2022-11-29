@@ -1,6 +1,7 @@
 package com.springboot.insurtechbackend.dao;
 import com.alibaba.fastjson.JSONObject;
 import com.springboot.insurtechbackend.CommonUtils.SingelJdbcConnect;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -17,7 +18,7 @@ public class UserProcessDao {
         System.out.println("1");
         List<Map<String, Object>>  result = template.queryForList("select *  from user " +
                 "left join vehicleinfo on user.UserID =vehicleinfo.userID " +
-                "left join  arpersonalinfo  on user.UserID =arpersonalinfo.userID left join address on  user.UserID= address.UserID");
+                "left join  arpersonalinfo  on user.UserID =arpersonalinfo.userID");
         System.out.println( "  "+result.get(1).get("FirstName"));
         System.out.println("XXX "+result.toString());
         String jsonxx = JSONObject.toJSONString(result);
@@ -55,9 +56,11 @@ public class UserProcessDao {
         JdbcTemplate template =  SingelJdbcConnect.showSingleTyepValue();
 
         try {
-            String sql = "INSERT INTO user(UserName,Password,UserType,CreditCardID, AddressID,Email,PhoneNo,LastName,FirstName,DateOfBirth,FullAddress) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
-            int dd= template.update(sql,UserName,Password,UserType,CreditCardID, AddressID,Email,PhoneNo,LastName,FirstName,DateOfBirth,fullAddress);
+            String sql = "INSERT INTO user(UserName,Password,UserType,CreditCardID, AddressID,Email,PhoneNo,LastName,FirstName,DateOfBirth,FullAddress" +
+                    ",Address,Apt,City,State,ZipCode) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            int dd= template.update(sql,UserName,Password,UserType,CreditCardID, AddressID,Email,PhoneNo
+                    ,LastName,FirstName,DateOfBirth,fullAddress,address,apt,city,state,zipCode);
             System.out.println("dddd"+dd);
         } catch (Exception e) {
             System.out.println("insert data error");
@@ -70,10 +73,6 @@ public class UserProcessDao {
         System.out.println("UserID"+resulMap.get("UserID"));
 
 
-        String sql1 = "INSERT INTO address(UserID,Address,Apt,City, State,ZipCode) "
-                + "VALUES (?,?,?,?,?,?);";
-        int daddressId = template.update(sql1,UserID,address,apt,city,state,zipCode);
-        System.out.println("daddressId"+daddressId);
 
     }
     public static HashMap<String, Object> selectUser()   {

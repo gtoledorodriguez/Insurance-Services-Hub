@@ -93,6 +93,19 @@ public class AutoServiceDao {
         //创建sql语句
         return  result;
     }
+    public static List<Map<String, Object>>  getServiceByServiceID( int serviceId ) {
+        System.out.println("into getServiceByServiceID");
+        List<Map<String, Object>>  result;
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        String SqlStr ="";
+        SqlStr=SqlStr+"select * from auto_service  where auto_service_id =?";
+        result = template.queryForList(SqlStr,serviceId);
+        String jsonxx = JSONObject.toJSONString(result);
+        System.out.println("jsonxx"+jsonxx);
+        return result ;
+
+
+    }
 //    public static int updateServiceDate( ) {
 //
 //        String sql = "update auto_service SET collision=? ,comprehensive=?,create_time=?,liability_bodily=?,liability_property=?" +

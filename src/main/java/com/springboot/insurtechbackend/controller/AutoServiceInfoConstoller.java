@@ -201,6 +201,24 @@ public class AutoServiceInfoConstoller {
         return resultBox;
 
     }
+    @PostMapping("/getServiceByServiceID")
+    @ResponseBody
+    public ResultInfo getServiceByServiceID(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+        System.out.println("into updateService");
+        List<Map<String, Object>> result = null;
+
+        int serviceId = (int)map.get("serviceId");
+
+
+
+        result= AutoServiceDao.getServiceByServiceID(serviceId);
+        resultBox.setData(result);
+        return resultBox;
+
+    }
 
     }
 

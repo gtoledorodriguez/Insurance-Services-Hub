@@ -52,7 +52,19 @@ public class OrderProcessDao {
         return result;
 
     }
-
+    public static List<Map<String, Object>>  getOrderByEmail(String Email ) {
+        System.out.println("into getOrderByEmail");
+        List<Map<String, Object>>  result;
+        //run sql must add below code
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        System.out.println("1");
+        result = template.queryForList("select * from serviceorder left join user on serviceorder.UserID=user.UserID  " +
+                "where serviceorder.UserID= (select UserID from user where Email=?) ",Email);
+        System.out.println("XXX "+result.toString());
+        String jsonxx = JSONObject.toJSONString(result);
+        System.out.println("jsonxx"+jsonxx);
+        return result ;
+    }
 
 
     }

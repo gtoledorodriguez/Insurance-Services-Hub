@@ -2,6 +2,7 @@ package com.springboot.insurtechbackend.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.springboot.insurtechbackend.CommonUtils.SingelJdbcConnect;
+import com.springboot.insurtechbackend.dao.AutoServiceDao;
 import com.springboot.insurtechbackend.dao.OrderProcessDao;
 import com.springboot.insurtechbackend.model.AutoService;
 import com.springboot.insurtechbackend.model.ResultInfo;
@@ -124,6 +125,22 @@ public class OrderProcessController {
         resultBox.setData(result);
         return resultBox;
 
+    }
+    @PostMapping("/getOrderByEmail")
+    @ResponseBody
+    //  get service order info by userID
+    public ResultInfo getOrderByEmail(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+
+        List<Map<String, Object>> result = null;
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+
+        String Email = (String) map.get("Email");
+        result= OrderProcessDao.getOrderByEmail(Email);
+
+        resultBox.setData(result);
+        return resultBox;
     }
 
 

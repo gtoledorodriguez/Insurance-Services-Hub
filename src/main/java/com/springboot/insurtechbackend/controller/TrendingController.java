@@ -20,7 +20,7 @@ import java.util.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 //@Controller
-@RequestMapping("/service")
+@RequestMapping("/trending")
 //
 public class TrendingController {
     @Autowired
@@ -64,8 +64,6 @@ public class TrendingController {
         result= TrendingDao.getAllServicesSoldByAgent(AgentID);
         resultBox.setData(result);
         return resultBox;
-
-
     }
 
 //     //Get all service data of this user.
@@ -91,29 +89,29 @@ public class TrendingController {
 //         return resultBox;
 
 //     }
-//     @GetMapping("/{type}")
-// //    public ResponseEntity<List<AutoService>> findAll() {
-// //        List<AutoService> services = new ArrayList<>();
-// //        services = serviceRepository.findAll();
-// //        System.out.println(services);
-// //        return new ResponseEntity<>(services, HttpStatus.OK);
-// //    }
-//     public ResponseEntity<List<AutoService>> getAutoServicesByType(@PathVariable("type") int type) {
-//         try{
-//             System.out.println("into getAutoServicesByType function");
-//             List<AutoService> services = new ArrayList<AutoService>();
+     @GetMapping("/{type}")
+ //    public ResponseEntity<List<AutoService>> findAll() {
+ //        List<AutoService> services = new ArrayList<>();
+ //        services = serviceRepository.findAll();
+ //        System.out.println(services);
+ //        return new ResponseEntity<>(services, HttpStatus.OK);
+ //    }
+     public ResponseEntity<List<AutoService>> getAutoServicesByType(@PathVariable("type") int type) {
+         try{
+             System.out.println("into getAutoServicesByType function");
+             List<AutoService> services = new ArrayList<AutoService>();
 
-//             serviceRepository.findAllByType(type).forEach(services::add);
-//             System.out.println(services);
+             serviceRepository.findAllByType(type).forEach(services::add);
+             System.out.println(services);
 
-//             if (services.isEmpty())
-//                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+             if (services.isEmpty())
+                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-//             return new ResponseEntity<>(services, HttpStatus.OK);
-//         } catch (Exception e) {
-//             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//         }
-//     }
+             return new ResponseEntity<>(services, HttpStatus.OK);
+         } catch (Exception e) {
+             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+         }
+     }
 
 //     @PostMapping("/testReinventory")
 //     @ResponseBody

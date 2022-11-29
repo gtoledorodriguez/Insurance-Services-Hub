@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="insurTech-Backend" />
+        <module name="Insurance-Services-Hub" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Insurance-Services-Hub" options="-parameters" />
       <module name="insurTech-Backend" options="-parameters" />
     </option>
   </component>

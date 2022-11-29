@@ -7,6 +7,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.AggregationOutput;
+import com.springboot.insurtechbackend.model.Bestrating;
 import com.springboot.insurtechbackend.model.Review;
 
 import java.util.*;

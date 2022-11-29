@@ -67,7 +67,7 @@ public class TrendingDao {
         JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
         String SqlStr = "";
         SqlStr = SqlStr
-                + "select AutoServiceID, count(*) as c FROM insurancedbz.serviceorder GROUP BY AutoServiceID order by c desc limit 5;";
+                + "select AutoServiceID, count(*) as sold FROM insurancedbz.serviceorder GROUP BY AutoServiceID order by sold desc limit 5;";
         result = template.queryForList(SqlStr);
         String jsonxx = JSONObject.toJSONString(result);
         System.out.println("jsonxx" + jsonxx);
@@ -79,7 +79,7 @@ public class TrendingDao {
         System.out.println("into getAllServicesSoldByAgent");
         List<Map<String, Object>> result;
         JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
-        String SqlStr = "select AgentID ,AutoServiceID, count(*) as c FROM insurancedbz.serviceorder Where AgentID=? GROUP BY AutoServiceID order by c desc limit 5;";
+        String SqlStr = "select AgentID ,AutoServiceID, count(*) as sold FROM insurancedbz.serviceorder Where AgentID=? GROUP BY AutoServiceID order by sold desc limit 5;";
         result = template.queryForList(SqlStr, agentID);
         return result;
     }

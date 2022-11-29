@@ -157,6 +157,7 @@ public class AutoServiceInfoConstoller {
         autoService.setComprehensive((int)map.get("comprehensive"));
         autoService.setCreate_time(new Date());
         autoService.setLiability_property((int) map.get("liability_property"));
+        autoService.setLiability_bodily((int) map.get("liability_bodily"));
         autoService.setMedical((int) map.get("medical"));
         autoService.setUm_bodily((int) map.get("um_bodily"));
         autoService.setUm_property((int) map.get("um_property"));

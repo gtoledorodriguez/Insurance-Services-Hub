@@ -210,7 +210,51 @@ public class UserController {
 
 
     }
+    @PostMapping("/updateUserInfoById")
+    @ResponseBody
+    //regist user info
+    public ResultInfo updateUserInfoById(@RequestBody Map<String, Object> map,HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("into updateUserInfoById");
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+        int UserID = (int) map.get("UserID");
 
+        String UserType = (String) map.get("UserType");
+        String Password = (String) map.get("Password");
+        String Repassword = (String) map.get("Repassword");
+        String CreditCardID = (String) map.get("CreditCardID");
+
+        String AddressID = (String) map.get("AddressID");
+        String Email = (String) map.get("Email");
+        String LastName = (String) map.get("LastName");
+        String FirstName = (String) map.get("FirstName");
+        String DateOfBirth = (String) map.get("DateOfBirth");
+        String PhoneNo = (String) map.get("PhoneNo");
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//改为需要的东西
+        String UserName = FirstName+" "+ LastName;
+        Date realDate  = null;
+        try {
+            realDate = formatter.parse(DateOfBirth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("time erro");
+        }
+        String address = (String) map.get("Address");
+        System.out.println("Address"+address);
+        String city = (String) map.get("City");
+        String state = (String) map.get("State");
+        String zipCode = (String) map.get("ZipCode");
+        String apt = (String) map.get("Apt");
+        String fullAddress =  address+", "+city+", "+state+", "+zipCode;
+
+        int result = UserProcessDao.updateUserInfoById(UserID,UserName,Password,UserType,CreditCardID, AddressID,realDate,Email,PhoneNo,LastName,FirstName
+                ,address,city,state,zipCode,apt,fullAddress);;
+        resultBox.setData(result);
+        return resultBox;
+
+    }
 
 
 }

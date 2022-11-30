@@ -45,7 +45,6 @@ public class ReportController {
         List<Map<String, Object>> result = null;
         result = template.queryForList(" select left(orderTime,10)as dayTime , SUM(totalPrice) as daliySaleTaltol,count(*) as dailySaleCount from serviceorder group by left(orderTime,10)");
 
-        result= ReportInfoDam.totalOfEveryProductSold();
         resultBox.setData(result);
         return resultBox;
     }

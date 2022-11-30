@@ -1,6 +1,5 @@
 package com.springboot.insurtechbackend.dao;
 
-import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.springboot.insurtechbackend.CommonUtils.MongoDBDataStoreUtilities;
 import com.springboot.insurtechbackend.CommonUtils.SingelJdbcConnect;
@@ -11,8 +10,6 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ReviewDao {
     static DataSource dataSource = null;
@@ -69,14 +66,13 @@ public class ReviewDao {
         System.out.println("into storeReview");
         //System.out.println(AutoServiceID);
 
-        String message= MongoDBDataStoreUtilities.insertReview(name, age, occupation, state, zipcode, maker, type, year, milage, vehicle_type, service, rating, review_text);
+        String message = MongoDBDataStoreUtilities.insertReview(name, age, occupation, state, zipcode, maker, type, year, milage, vehicle_type, service, rating, review_text);
 //        List<Map<String, Object>> result;
         JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
         String result = "Empty";
-        if(!message.equals("Successfull")) {
+        if (!message.equals("Successfull")) {
             result = "Unsuccessful";
-        }
-        else {
+        } else {
             HashMap<String, ArrayList<Review>> reviews = new HashMap<String, ArrayList<Review>>();
             try {
                 reviews = MongoDBDataStoreUtilities.selectReview();
@@ -111,4 +107,57 @@ public class ReviewDao {
         return result;
     }
 
+    public static ArrayList<Review> viewReviewsByVehicleType(String vehicle_type) {
+        System.out.println("into viewReviewsByVehicleType");
+        System.out.println(vehicle_type);
+        ArrayList<Review> result = new ArrayList<Review>();
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        //String SqlStr = "select AgentID ,AutoServiceID, count(*) as sold FROM insurancedbz.serviceorder Where AgentID=? GROUP BY AutoServiceID order by sold desc limit 5;";
+        //result = template.queryForList(SqlStr, agentID);
+
+        try {
+        String vehicle_type_service = vehicle_type;
+        HashMap<String, ArrayList<Review>> hm = MongoDBDataStoreUtilities.selectReview();
+        String userName = "";
+        String reviewRating = "";
+        String reviewText = "";
+        String price = "";
+        String zipcode = "";
+
+        //if there are no reviews for product print no review else iterate over all the reviews using cursor and print the reviews in a table
+        if (hm == null) {
+            System.out.println("Mongo Db server is not up and running");
+        } else {
+            if (!hm.containsKey(vehicle_type_service)) {
+                System.out.println("There are no reviews for this product.");
+            } else {
+                result = hm.get(vehicle_type_service);
+                for (Review r : hm.get(vehicle_type_service)) {
+
+                    vehicle_type_service = r.getVehicleType();
+
+                    userName = r.getUserName();
+
+//                    price = r.getPrice();
+
+                    zipcode = r.getUserZipcode();
+
+                    reviewRating = r.getReviewRating().toString();
+
+                    reviewText = r.getReviewText();
+
+                }
+
+            }
+        }
+
+    }catch( Exception e){
+        System.out.println(e.getMessage());
+    }
+
+
+    String jsonxx = JSONObject.toJSONString(result);
+        System.out.println("jsonxx"+jsonxx);
+        return result;
+}
 }

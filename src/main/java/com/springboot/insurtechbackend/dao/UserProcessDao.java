@@ -114,11 +114,14 @@ public class UserProcessDao {
     }
     public static List<Map<String, Object>>  getUserByType(int userID)   {
 
-        List<Map<String, Object>>  result;
+
         JdbcTemplate template =  SingelJdbcConnect.showSingleTyepValue();
-        String sql = "select * from  User where UserID=? ";
-        result = template.queryForList(sql,userID);
+        String sql="select *  from user left join vehicleinfo on user.UserID =vehicleinfo.userID left join  arpersonalinfo  on user.UserID =arpersonalinfo.userID where user.UserID = ?";
+        List<Map<String, Object>>  result = template.queryForList("select *  from user " +
+                "left join vehicleinfo on user.UserID =vehicleinfo.userID " +
+                "left join  arpersonalinfo  on user.UserID =arpersonalinfo.userID where user.UserID = ?",userID);
         System.out.println("rs"+result.toString());
+
         return result;
     }
     public static int updateUserInfoById(int UserID,String UserName, String Password, String UserType,

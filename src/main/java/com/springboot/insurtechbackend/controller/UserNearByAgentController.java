@@ -34,5 +34,23 @@ public class UserNearByAgentController {
         return resultBox;
 
     }
+    @PostMapping("/getcurrentUserLocation")
+    @ResponseBody
+    public ResultInfo getcurrentUserLocation(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+
+        int userIDInt = (int) map.get("userID");
+        System.out.println("into getcurrentUserLocation");
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+        List<Map<String, Object>> result = null;
+//        String userID=String.valueOf(userIDInt);
+        result = CommonDao.getcurrentUserLocation(userIDInt);
+
+        System.out.println("result"+result.toString());
+        resultBox.setData(result);
+        return resultBox;
+
+    }
 
     }

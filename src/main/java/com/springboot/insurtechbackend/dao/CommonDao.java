@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.springboot.insurtechbackend.CommonUtils.SingelJdbcConnect;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CommonDao {
     public static void main(String[] args) {
-        userWithAgentsOneMile(1);
+        getcurrentUserLocation(1);
     }
     public static List<Map<String, Object>> userWithAgentsOneMile(int userId ) {
 
@@ -36,5 +38,30 @@ public class CommonDao {
         return result;
 
     }
+
+    public static List<Map<String, Object>> getcurrentUserLocation(int userId ) {
+        System.out.println("into userWithAgentsOneMile");
+
+        List<Map<String, Object>> resultUser  = UserProcessDao.getUserByType(userId);
+        System.out.println("JSONObject.toJSONString(resultUser)"+ JSONObject.toJSONString(resultUser));
+        Map<String,Object> Map=resultUser.get(0);
+        double user_lat = (double) Map.get("user_lat");
+        double user_long = (double) Map.get("user_long");
+        String Email = (String) Map.get("Email");
+        System.out.println("XXXuser_lat"+user_lat +"  "+"user_long"+user_long+"  "+"Email "+ Email);
+        Map<String,Object>  resultItem = new HashMap<>();
+        resultItem.put("Email",Map.get("Email"));
+        resultItem.put("FullAddress",Map.get("FullAddress"));
+        resultItem.put("PhoneNo",Map.get("PhoneNo"));
+        resultItem.put("UserName",Map.get("UserName"));
+        resultItem.put("user_lat",Map.get("user_lat"));
+        resultItem.put("user_long",Map.get("user_long"));
+        List<Map<String, Object>> result =new ArrayList<>();
+        result.add(resultItem);
+
+        return result;
+
+    }
+
 
     }

@@ -2,10 +2,12 @@ package com.springboot.insurtechbackend.model;
 
 public class Bestrating {
     String serviceVehicleType;
+    String service;
     String reviewRating;
 
-    public Bestrating(String serviceVehicleType, String reviewRating) {
+    public Bestrating(String serviceVehicleType, String service,String reviewRating) {
         this.serviceVehicleType = serviceVehicleType;
+        this.service = service;
         this.reviewRating = reviewRating;
     }
 
@@ -15,6 +17,14 @@ public class Bestrating {
 
     public void setServiceVehicleType(String serviceVehicleType) {
         this.serviceVehicleType = serviceVehicleType;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
     }
 
     public String getReviewRating() {

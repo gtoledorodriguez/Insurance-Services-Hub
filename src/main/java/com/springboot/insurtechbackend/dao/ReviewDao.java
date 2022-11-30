@@ -116,48 +116,48 @@ public class ReviewDao {
         //result = template.queryForList(SqlStr, agentID);
 
         try {
-        String vehicle_type_service = vehicle_type;
-        HashMap<String, ArrayList<Review>> hm = MongoDBDataStoreUtilities.selectReview();
-        String userName = "";
-        String reviewRating = "";
-        String reviewText = "";
-        String price = "";
-        String zipcode = "";
+            String vehicle_type_service = vehicle_type;
+            HashMap<String, ArrayList<Review>> hm = MongoDBDataStoreUtilities.selectReview();
+//        String userName = "";
+//        String reviewRating = "";
+//        String reviewText = "";
+//        String price = "";
+//        String zipcode = "";
 
-        //if there are no reviews for product print no review else iterate over all the reviews using cursor and print the reviews in a table
-        if (hm == null) {
-            System.out.println("Mongo Db server is not up and running");
-        } else {
-            if (!hm.containsKey(vehicle_type_service)) {
-                System.out.println("There are no reviews for this product.");
+            //if there are no reviews for product print no review else iterate over all the reviews using cursor and print the reviews in a table
+            if (hm == null) {
+                System.out.println("Mongo Db server is not up and running");
             } else {
-                result = hm.get(vehicle_type_service);
-                for (Review r : hm.get(vehicle_type_service)) {
-
-                    vehicle_type_service = r.getVehicleType();
-
-                    userName = r.getUserName();
-
-//                    price = r.getPrice();
-
-                    zipcode = r.getUserZipcode();
-
-                    reviewRating = r.getReviewRating().toString();
-
-                    reviewText = r.getReviewText();
+                if (!hm.containsKey(vehicle_type_service)) {
+                    System.out.println("There are no reviews for this product.");
+                } else {
+                    result = hm.get(vehicle_type_service);
+//                for (Review r : hm.get(vehicle_type_service)) {
+//
+//                    vehicle_type_service = r.getVehicleType();
+//
+//                    userName = r.getUserName();
+//
+////                    price = r.getPrice();
+//
+//                    zipcode = r.getUserZipcode();
+//
+//                    reviewRating = r.getReviewRating().toString();
+//
+//                    reviewText = r.getReviewText();
+//
+//                }
 
                 }
-
             }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
-    }catch( Exception e){
-        System.out.println(e.getMessage());
-    }
 
-
-    String jsonxx = JSONObject.toJSONString(result);
-        System.out.println("jsonxx"+jsonxx);
+        String jsonxx = JSONObject.toJSONString(result);
+        System.out.println("jsonxx" + jsonxx);
         return result;
-}
+    }
 }

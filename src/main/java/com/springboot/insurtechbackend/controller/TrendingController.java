@@ -3,6 +3,7 @@ package com.springboot.insurtechbackend.controller;
 import com.springboot.insurtechbackend.dao.AutoServiceDao;
 import com.springboot.insurtechbackend.dao.TrendingDao;
 import com.springboot.insurtechbackend.model.AutoService;
+import com.springboot.insurtechbackend.model.Bestrating;
 import com.springboot.insurtechbackend.model.ResultInfo;
 import com.springboot.insurtechbackend.repository.ServiceRepository;
 import com.springboot.insurtechbackend.respository.ServiceRepositoryCURD;
@@ -101,6 +102,20 @@ public class TrendingController {
         }
         System.out.println("autoServiceID "+AutoServiceID);
         result= TrendingDao.getBestAgentsByService(AutoServiceID);
+        resultBox.setData(result);
+        return resultBox;
+    }
+
+    @GetMapping("/getTopServicesByBestRated")
+//    @PostMapping("/getTopServicesByBestRated")
+    @ResponseBody
+    public ResultInfo getTopServicesByBestRated_service(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+        ArrayList<Bestrating> result = null;
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+
+        result= TrendingDao.getTopServicesByBestRated();
         resultBox.setData(result);
         return resultBox;
     }

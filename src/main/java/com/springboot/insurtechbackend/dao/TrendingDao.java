@@ -1,12 +1,14 @@
 package com.springboot.insurtechbackend.dao;
 
-import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.springboot.insurtechbackend.CommonUtils.MongoDBDataStoreUtilities;
 import com.springboot.insurtechbackend.CommonUtils.SingelJdbcConnect;
+import com.springboot.insurtechbackend.model.Bestrating;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -94,6 +96,35 @@ public class TrendingDao {
         JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
         String SqlStr = "select AgentID FROM insurancedbz.serviceorder Where AutoServiceID=? GROUP BY AgentID order by count(*) desc limit 5;";
         result = template.queryForList(SqlStr, AutoServiceID);
+        String jsonxx = JSONObject.toJSONString(result);
+        System.out.println("jsonxx" + jsonxx);
+        return result;
+    }
+
+    public static ArrayList<Bestrating> getTopServicesByBestRated() {
+        System.out.println("into getTopServicesByBestRated");
+        ArrayList<Bestrating> result = new ArrayList<Bestrating>();
+        JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
+        try {
+            ArrayList<Bestrating> hm = MongoDBDataStoreUtilities.topProducts();
+//        String userName = "";
+//        String reviewRating = "";
+//        String reviewText = "";
+//        String price = "";
+//        String zipcode = "";
+
+            //if there are no reviews for product print no review else iterate over all the reviews using cursor and print the reviews in a table
+            if (hm == null) {
+                System.out.println("Mongo Db server is not up and running");
+            } else {
+                result = hm;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
         String jsonxx = JSONObject.toJSONString(result);
         System.out.println("jsonxx" + jsonxx);
         return result;

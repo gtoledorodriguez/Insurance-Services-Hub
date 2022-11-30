@@ -60,7 +60,6 @@ public class ReportController {
         System.out.println("into updateService");
         List<Map<String, Object>> result = null;
         result = template.queryForList("select user.Email as agentEmail,PhoneNo,user.UserName AS agentName,SUM(totalPrice) as agentSaleTotal,count(*) as agentSaleServiceAcount  from serviceorder left join user on  serviceorder.AgentID= user.UserID  GROUP BY  serviceorder.AgentID");
-        result= ReportInfoDam.totalOfEveryProductSold();
         resultBox.setData(result);
         return resultBox;
     }
@@ -82,7 +81,7 @@ public class ReportController {
         return resultBox;
 
     }
-    @PostMapping("showSaleServerAndCount/")
+    @PostMapping("/showSaleServerAndCount")
     @ResponseBody
     //inventory  report2: Show the number of sales of products that have been sold
     public ResultInfo showSaleServerAndCount(@RequestBody Map<String, Object> map, HttpServletRequest request) {

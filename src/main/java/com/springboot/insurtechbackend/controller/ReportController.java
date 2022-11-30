@@ -26,7 +26,6 @@ public class ReportController {
         resultBox.setErrorMsg("successfully");
         System.out.println("into updateService");
         List<Map<String, Object>> result = null;
-        int serviceId = (int)map.get("serviceId");
         result= ReportInfoDam.totalOfEveryProductSold();
         resultBox.setData(result);
         return resultBox;
@@ -46,7 +45,6 @@ public class ReportController {
         List<Map<String, Object>> result = null;
         result = template.queryForList(" select FT.serviceFullName,SUM(totalPrice) as totalSalePrice ,SUM(Total) as quantity , FT.auto_service_id from  serviceorder  left join ( SELECT  *,CONCAT(service_name,'_type_',type) as serviceFullName  FROM auto_service) as FT " +
                 "on   serviceorder.AutoServiceID=FT.auto_service_id  GROUP BY  FT.serviceFullName");
-        int serviceId = (int)map.get("serviceId");
         result= ReportInfoDam.totalOfEveryProductSold();
         resultBox.setData(result);
         return resultBox;
@@ -63,7 +61,6 @@ public class ReportController {
         System.out.println("into updateService");
         List<Map<String, Object>> result = null;
         result = template.queryForList(" select left(orderTime,10)as dayTime , SUM(totalPrice) as daliySaleTaltol,count(*) as dailySaleCount from serviceorder group by left(orderTime,10)");
-        int serviceId = (int)map.get("serviceId");
         result= ReportInfoDam.totalOfEveryProductSold();
         resultBox.setData(result);
         return resultBox;
@@ -86,7 +83,7 @@ public class ReportController {
         return resultBox;
 
     }
-    @PostMapping("/showSaleServerAndCount")
+    @PostMapping("showSaleServerAndCount/")
     @ResponseBody
     //inventory  report2: Show the number of sales of products that have been sold
     public ResultInfo showSaleServerAndCount(@RequestBody Map<String, Object> map, HttpServletRequest request) {

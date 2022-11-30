@@ -5,6 +5,7 @@ import com.springboot.insurtechbackend.dao.ReviewDao;
 import com.springboot.insurtechbackend.dao.TrendingDao;
 import com.springboot.insurtechbackend.model.AutoService;
 import com.springboot.insurtechbackend.model.ResultInfo;
+import com.springboot.insurtechbackend.model.Review;
 import com.springboot.insurtechbackend.repository.ServiceRepository;
 import com.springboot.insurtechbackend.respository.ServiceRepositoryCURD;
 import org.omg.CORBA.portable.ValueOutputStream;
@@ -131,6 +132,20 @@ public class ReviewController {
 
         System.out.println("vehicle_type: "+vehicle_type);
         result = ReviewDao.storeReview(name, age, occupation, state, zipcode, maker, type, year, milage, vehicle_type, service, rating, review_text);
+        resultBox.setData(result);
+        return resultBox;
+    }
+
+    @GetMapping("/viewReviewsByVehicleType")
+//    @PostMapping("/viewReviewsByVehicleType")
+    @ResponseBody
+    public ResultInfo viewReviewsByVehicleType_reviews(@RequestParam(name="vehicle_type",defaultValue="") String vehicle_type ,@RequestBody Map<String, Object> map, HttpServletRequest request) {
+        ArrayList<Review> result = null;
+        ResultInfo resultBox = new ResultInfo();
+        resultBox.setFlag("1");
+        resultBox.setErrorMsg("successfully");
+
+        result= ReviewDao.viewReviewsByVehicleType(vehicle_type);
         resultBox.setData(result);
         return resultBox;
     }

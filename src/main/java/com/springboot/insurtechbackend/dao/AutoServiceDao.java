@@ -29,11 +29,11 @@ public class AutoServiceDao {
 //       StringUtils.isNotBlank(str)//判断字符串不为空
         System.out.println("1");
         String SqlStr ="";
-        SqlStr=SqlStr+"select * from autoservice";
+        SqlStr=SqlStr+"select * from auto_service";
 
         if(op=="1"){
             System.out.println("into 1");
-            SqlStr=SqlStr+" where  autoservice.AutoServiceID in (select AutoServiceID from serviceorder  where userid =?)";
+            SqlStr=SqlStr+" where  auto_service.auto_service_id in (select AutoServiceID from serviceorder  where userid =?)";
             result = template.queryForList(SqlStr,userId);
 
         }else {

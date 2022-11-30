@@ -109,17 +109,17 @@ public class ReviewController {
     @PostMapping("/storeReview")
     @ResponseBody
     public ResultInfo storeReview_review(@RequestParam(name="name",defaultValue="")  String name,
-                                         @RequestParam(name="age",defaultValue="") String age,
+                                         @RequestParam(name="age",defaultValue="0") String age,
                                          @RequestParam(name="occupation",defaultValue="") String occupation,
                                          @RequestParam(name="state",defaultValue="") String state,
                                          @RequestParam(name="zipcode",defaultValue="") String zipcode,
                                          @RequestParam(name="maker",defaultValue="") String maker,
                                          @RequestParam(name="type",defaultValue="") String type,
-                                         @RequestParam(name="year",defaultValue="") String year,
+                                         @RequestParam(name="year",defaultValue="0") String year,
                                          @RequestParam(name="milage",defaultValue="") String milage,
                                          @RequestParam(name="vehicle_type",defaultValue="") String vehicle_type,
                                          @RequestParam(name="service",defaultValue="") String service,
-                                         @RequestParam(name="rating",defaultValue="") String rating,
+                                         @RequestParam(name="rating",defaultValue="-1") String rating,
                                          @RequestParam(name="review_text",defaultValue="") String review_text,
                                          @RequestBody Map<String, Object> map, HttpServletRequest request) {
 //        List<Map<String, Object>> result = null;

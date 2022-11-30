@@ -121,6 +121,25 @@ public class UserProcessDao {
         System.out.println("rs"+result.toString());
         return result;
     }
+    public static int updateUserInfoById(int UserID,String UserName, String Password, String UserType,
+                                    String CreditCardID, String AddressID, Date DateOfBirth,
+                                    String Email, String PhoneNo, String LastName,String FirstName,
+                                    String address ,String city ,String state ,String zipCode , String apt,String fullAddress) {
+        System.out.println("into updateUserInfoById");
+        JdbcTemplate template =  SingelJdbcConnect.showSingleTyepValue();
+
+
+
+        String SqlStr ="update  user  set  UserName=?, Password=?, UserType=?, " +
+                "CreditCardID=?, AddressID=?, DateOfBirth=?, Email=? , PhoneNo=?, LastName=?, FirstName=?, " +
+                "Address=?, City=?, State=?, ZipCode=?, Apt=?, FullAddress=?where UserID= ?" ;
+        int result = template.update(SqlStr,UserName,Password,UserType,CreditCardID,AddressID,DateOfBirth,Email,PhoneNo,
+                LastName,FirstName,address,city,state,zipCode,apt,fullAddress,UserID);
+        System.out.println("result"+result);
+
+        return result;
+
+    }
 
 
 }

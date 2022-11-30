@@ -99,9 +99,13 @@ public class MongoDBDataStoreUtilities {
                 BasicDBObject obj = (BasicDBObject) cursor.next();
 
                 String prodcutnm = obj.get("serviceVehicleType").toString();
+                String service = obj.get("serviceChosen").toString();
                 String rating = obj.get("reviewRating").toString();
-                Bestrating best = new Bestrating(prodcutnm, rating);
-                Bestrate.add(best);
+                if(!(rating.equals("-1"))){
+                    Bestrating best = new Bestrating(prodcutnm, service,rating);
+                    Bestrate.add(best);
+                }
+
             }
 
         } catch (Exception e) {

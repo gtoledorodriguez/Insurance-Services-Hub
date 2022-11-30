@@ -20,18 +20,18 @@ import java.util.Map;
 @RequestMapping("/order")
 public class OrderProcessController {
 
-    @PostMapping("/byID")
+    @PostMapping("/getOrderbyID")
     @ResponseBody
     //  get service order info by userID
-    public ResultInfo getOrderById(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+    public ResultInfo getOrderByOrderId(@RequestBody Map<String, Object> map, HttpServletRequest request) {
 
-        String userId = (String) map.get("userID");
+        String orderID = (String) map.get("orderID");
         List<Map<String, Object>> result = null;
         ResultInfo resultBox = new ResultInfo();
 
         resultBox.setFlag("1");
         resultBox.setErrorMsg("successfully");
-        result= OrderProcessDao.getOderListByName(userId);
+        result= OrderProcessDao.getOderListByName(orderID);
         String responseJson = null;
 
         if (result.size() < 1) {

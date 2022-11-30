@@ -18,14 +18,14 @@ public class OrderProcessDao {
     }
 
 
-    public static List<Map<String, Object>> getOderListByName(String userId ) {
+    public static List<Map<String, Object>> getOderListByName(String orderId ) {
         System.out.println("into getOderListByName");
         List<Map<String, Object>>  result;
         //run sql must add below code
         JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
         System.out.println("1");
-        result = template.queryForList("select * from serviceorder " +
-                "left join  auto_service on serviceorder.AutoServiceID =auto_service.auto_service_id where serviceorder.UserID =?",userId);
+
+        result = template.queryForList("select * from serviceorder left join user on serviceorder.UserID=user.UserID  left join  auto_service on  serviceorder.AutoServiceID =auto_service.auto_service_id left join vehicleinfo on  user.UserID=vehicleinfo.userId where ServiceOrderID=?",orderId);
         System.out.println("XXX "+result.toString());
         String jsonxx = JSONObject.toJSONString(result);
         System.out.println("jsonxx"+jsonxx);

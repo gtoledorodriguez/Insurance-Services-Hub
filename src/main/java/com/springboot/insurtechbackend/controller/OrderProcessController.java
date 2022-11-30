@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -111,15 +113,21 @@ public class OrderProcessController {
         int price = (int)map.get("price");
         String AgentID = (String)map.get("AgentID");
         String Status = (String)map.get("Status");
+//        String orderTime = ;
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String orderTime = sdf.format(date);
+        System.out.println("orderTime"+orderTime);
+
         int AutoServiceID = (int)map.get("AutoServiceID");
         double totalPrice  = (double)(Total * price);
         totalPrice =totalPrice-Discount;
 
         String SqlStr ="INSERT INTO  serviceorder (UserID, Description, Discount, Total, " +
-                "AgentID, Status, AutoServiceID, totalPrice) " +
-                "VALUES (?,?,?,?,?,?,?,?)";
+                "AgentID, Status, AutoServiceID, totalPrice,orderTime) " +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
         JdbcTemplate template = SingelJdbcConnect.showSingleTyepValue();
-        int result = template.update(SqlStr,UserID,Description,Discount,Total,AgentID,Status,AutoServiceID,totalPrice);
+        int result = template.update(SqlStr,UserID,Description,Discount,Total,AgentID,Status,AutoServiceID,totalPrice,orderTime);
         System.out.println("result"+result);
 
         resultBox.setData(result);

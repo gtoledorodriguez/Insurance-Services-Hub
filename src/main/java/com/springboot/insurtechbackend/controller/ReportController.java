@@ -43,8 +43,8 @@ public class ReportController {
         resultBox.setErrorMsg("successfully");
         System.out.println("into updateService");
         List<Map<String, Object>> result = null;
-        result = template.queryForList(" select FT.serviceFullName,SUM(totalPrice) as totalSalePrice ,SUM(Total) as quantity , FT.auto_service_id from  serviceorder  left join ( SELECT  *,CONCAT(service_name,'_type_',type) as serviceFullName  FROM auto_service) as FT " +
-                "on   serviceorder.AutoServiceID=FT.auto_service_id  GROUP BY  FT.serviceFullName");
+        result = template.queryForList(" select left(orderTime,10)as dayTime , SUM(totalPrice) as daliySaleTaltol,count(*) as dailySaleCount from serviceorder group by left(orderTime,10)");
+
         result= ReportInfoDam.totalOfEveryProductSold();
         resultBox.setData(result);
         return resultBox;
@@ -60,7 +60,7 @@ public class ReportController {
         resultBox.setErrorMsg("successfully");
         System.out.println("into updateService");
         List<Map<String, Object>> result = null;
-        result = template.queryForList(" select left(orderTime,10)as dayTime , SUM(totalPrice) as daliySaleTaltol,count(*) as dailySaleCount from serviceorder group by left(orderTime,10)");
+        result = template.queryForList("select user.Email as agentEmail,PhoneNo,user.UserName AS agentName,SUM(totalPrice) as agentSaleTotal,count(*) as agentSaleServiceAcount  from serviceorder left join user on  serviceorder.AgentID= user.UserID  GROUP BY  serviceorder.AgentID");
         result= ReportInfoDam.totalOfEveryProductSold();
         resultBox.setData(result);
         return resultBox;
@@ -94,7 +94,7 @@ public class ReportController {
         resultBox.setErrorMsg("successfully");
         System.out.println("into updateService");
         List<Map<String, Object>> result = null;
-        result = template.queryForList("   select FT.auto_service_id ,FT.serviceFullName,Rental  as price ,count(*) as saleAcount from  serviceorder  left join ( SELECT  *,CONCAT(service_name,'_type_',type) as serviceFullName  FROM auto_service) as FT on   serviceorder.AutoServiceID=FT.auto_service_id  GROUP BY  FT.serviceFullName");
+        result = template.queryForList("select FT.auto_service_id ,FT.serviceFullName,Rental  as price ,count(*) as saleAcount from  serviceorder  left join ( SELECT  *,CONCAT(service_name,'_type_',type) as serviceFullName  FROM auto_service) as FT on   serviceorder.AutoServiceID=FT.auto_service_id  GROUP BY  FT.serviceFullName");
 
         resultBox.setData(result);
         return resultBox;
